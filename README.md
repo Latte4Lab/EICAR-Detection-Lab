@@ -1,4 +1,4 @@
-# 🔵 SSH Brute Force Detection Lab
+# 🔵 EICAR Detection Lab
 
 ## 📖 Overview
 This lab demonstrates how Wazuh SIEM will alert us about detection of malware in one of our agent.
@@ -18,23 +18,38 @@ There is a slight tweak on **Wazuh SIEM's ossec.conf** to make it able to take i
 
 ## 🛡️ Documentation
 - Configuring the ossec.conf to enable it to take logs from **Windows Defender.**
-  ![ossec.conf changes](https://github.com/putu-elang/cybersecurity-lab/blob/main/blue-team/KnownVirus/Screenshots/XML%20addition%20for%20%20windows%20%20defender%20log.png)
+```bash
+<localfile>
+  <log_format>eventchannel</log_format>
+  <location>Security</location>
+</localfile>
+<localfile>
+  <log_format>eventchannel</log_format>
+  <location>Microsoft-Windows-Windows Defender/Operational</location>
+</localfile>
+```
 
+  ![ossec.conf changes](https://github.com/Latte4Lab/EICAR-Detection-Lab/blob/main/Screenshots/XML%20addition%20for%20%20windows%20%20defender%20log.png)
+  
 - EICAR file creation **(The malware)**
-  ![EICAR File](https://github.com/putu-elang/cybersecurity-lab/blob/main/blue-team/KnownVirus/Screenshots/EICAR%20string.png)
+ ```bash
+  X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
+```
+
+  ![EICAR File](https://github.com/Latte4Lab/EICAR-Detection-Lab/blob/main/Screenshots/EICAR%20string.png)
 
 - Running the EICAR file
-  ![Opening the EICAR file](https://github.com/putu-elang/cybersecurity-lab/blob/main/blue-team/KnownVirus/Screenshots/EICAR%20%20run.png)
+  ![Opening the EICAR file](https://github.com/Latte4Lab/EICAR-Detection-Lab/blob/main/Screenshots/EICAR%20%20run.png)
 
 - Wazuh logs detects installation of potential **malware** on Windows Agent.
-  ![Wazuh Logs](https://github.com/putu-elang/cybersecurity-lab/blob/main/blue-team/KnownVirus/Screenshots/Wazuh%20%20Dashboard.png)
+  ![Wazuh Logs](https://github.com/Latte4Lab/EICAR-Detection-Lab/blob/main/Screenshots/Wazuh%20%20Dashboard.png)
 
 -Double check the logs with **Windows Defender logs.**
-  ![Windows Defender Logs](https://github.com/putu-elang/cybersecurity-lab/blob/main/blue-team/KnownVirus/Screenshots/Defender%20Log.png)
+  ![Windows Defender Logs](https://github.com/Latte4Lab/EICAR-Detection-Lab/blob/main/Screenshots/Defender%20Log.png)
 
 ### ✅ Triggered Rules
 1. **Rule 62123** - Installation of Potential Malware
-   ![Rule 62123](https://github.com/putu-elang/cybersecurity-lab/blob/main/blue-team/KnownVirus/Screenshots/Ruleset.png)
+   ![Rule 62123](https://github.com/Latte4Lab/EICAR-Detection-Lab/blob/main/Screenshots/Ruleset.png)
 
    ---
 
